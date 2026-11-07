@@ -1,0 +1,98 @@
+/* Vecino — marketplace de changas de confianza (Uruguay). Versión web (desktop). */
+:root {
+  color-scheme: light;
+  --ink: #16201c;        /* texto principal */
+  --green: #0e7c66;      /* confianza / acento primario */
+  --green-d: #0a5f4e;
+  --green-soft: #e3f1ed;
+  --amber: #b9820a;      /* dinero / verificado */
+  --amber-soft: #fbf0d8;
+  --paper: #f6f4ef;      /* fondo app */
+  --card: #ffffff;
+  --line: #e3e0d8;
+  --muted: #6b726c;
+  --danger: #b4412e;
+  --shadow: 0 1px 2px rgba(22, 32, 28, 0.06), 0 8px 24px rgba(22, 32, 28, 0.08);
+  --shadow-lg: 0 20px 50px rgba(22, 32, 28, 0.14);
+  --radius: 16px;
+  --font-body: "Figtree", system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+}
+
+#root {
+  width: 100%;
+}
+
+img {
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+/* hover / interacción (solo con mouse) */
+@media (hover: hover) {
+  .cardx {
+    transition: transform 0.14s ease, box-shadow 0.14s ease;
+  }
+  .cardx:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+  }
+  .navlink:hover {
+    color: var(--ink);
+  }
+  .lift:hover {
+    filter: brightness(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardx {
+    transition: none;
+  }
+}
+
+/* contenedor centrado de página */
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 24px 72px;
+}
+
+/* columnas que colapsan en pantallas angostas */
+@media (max-width: 760px) {
+  .split {
+    grid-template-columns: 1fr !important;
+  }
+  .split > div[style*="sticky"] {
+    position: static !important;
+  }
+  .nav-desktop {
+    display: none !important;
+  }
+}
