@@ -37,7 +37,7 @@ export default function WebApp() {
         resultados: <Resultados go={go} setData={setData} />,
         perfilp: <PerfilPrestador go={go} p={data.sel} back={back} />,
         checkout: <Checkout go={go} p={data.sel} back={back} />,
-        seguimiento: <Seguimiento go={go} />,
+        seguimiento: <Seguimiento go={go} p={data.sel} />,
       }[data.view] || null;
   } else {
     body =
@@ -741,13 +741,14 @@ function Checkout({ go, p, back }) {
 }
 
 /* ---------------------------------------------------------------- SEGUIMIENTO */
-function Seguimiento({ go }) {
+function Seguimiento({ go, p }) {
   const [done, setDone] = useState(false);
+  const nombre = (p?.nombre || "Mariana").split(" ")[0];
   const pasos = [
     { t: "Pago retenido", d: "$ 1.540 en garantía", ok: true },
-    { t: "Mariana confirmó", d: "Llega hoy 16:00", ok: true },
+    { t: `${nombre} confirmó`, d: "Llega hoy 16:00", ok: true },
     { t: "Trabajo en curso", d: "Armando el placar", ok: true },
-    { t: "Confirmás y se libera el pago", d: done ? "¡Listo! Pago liberado a Mariana" : "Pendiente de tu OK", ok: done },
+    { t: "Confirmás y se libera el pago", d: done ? `¡Listo! Pago liberado a ${nombre}` : "Pendiente de tu OK", ok: done },
   ];
   return (
     <div className="page" style={{ maxWidth: 920 }}>
@@ -793,7 +794,7 @@ function Seguimiento({ go }) {
             <>
               <Card pad={18}>
                 <div style={{ textAlign: "center", fontSize: 14.5 }}>
-                  Se liberaron <strong>$ 1.400</strong> a Mariana. ¡Dejale una reseña!
+                  Se liberaron <strong>$ 1.400</strong> a {nombre}. ¡Dejale una reseña!
                 </div>
               </Card>
               <Btn variant="ghost" onClick={() => go("home")}>
@@ -833,7 +834,7 @@ function Seguimiento({ go }) {
               gap: 8,
             }}
           >
-            <PersonAvatar v={0} size={28} /> Mariana está en camino · 8 min
+            <PersonAvatar v={p?.v ?? 0} size={28} /> {nombre} está en camino · 8 min
           </div>
         </div>
       </div>
